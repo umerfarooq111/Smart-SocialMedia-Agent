@@ -119,24 +119,19 @@ CommentAnalyzer/
 ├── .python-version       # Pin for active python environment
 ├── pyproject.toml        # Package & dependency declaration
 ├── run.py                # Main CLI interactive loop
-├── main.py               # Package entry point
 ├── uv.lock               # Lockfile for dependency tree
 └── app/
     ├── __init__.py       # Package initializer
     ├── agent/            # Agent definition & core orchestration
     │   ├── __init__.py
     │   ├── agent.py      # Main LangChain agent setup
-    │   ├── graph.py      # Reserved for future LangGraph transitions
-    │   ├── node.py       # Executable node hooks
-    │   ├── prompts.py    # Local system prompts for agent instructions
-    │   └── state.py      # Shared graph state configuration
+    │   └── prompts.py    # Local system prompts for agent instructions
     ├── llm/              # Large Language Model definitions
     │   ├── __init__.py
     │   └── model.py      # Initialization of Google Gemini 2.0 Flash
     ├── prompts/          # Global prompt templates
     │   ├── __init__.py
-    │   ├── reply_prompt.py   # Style guidelines for customer support replies
-    │   └── system_prompt.py  # Global operational guidelines
+    │   └── reply_prompt.py   # Style guidelines for customer support replies
     ├── tools/            # Modulating tools
     │   ├── __init__.py   # Exports registered list of tools
     │   └── moderation.py # Tools logic (reply, delete, escalate, hide, ignore)
