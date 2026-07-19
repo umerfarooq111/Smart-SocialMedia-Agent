@@ -1,6 +1,6 @@
 from langchain_core.messages import HumanMessage
 from app.agent.agent import agent
-from app.utils.helpers import extract_text
+from app.utils.printer import print_stream
 
 def main():
 
@@ -15,20 +15,20 @@ def main():
         if comment.lower() == "exit":
             break
 
-        result = agent.invoke(
+        print("\n" + "=" * 60)
+        print("Agent Streaming Progress")
+        print("=" * 60)
+
+        for chunk in agent.stream(
             {
                 "messages": [
                     HumanMessage(content=comment)
                 ]
             }
-        )
+        ):
+            print_stream(chunk)
 
         print("\n" + "=" * 60)
-        print("Final Response")
-        print("=" * 60)
-
-
-        print(extract_text(result["messages"][-1]))
 
 if __name__ == "__main__":
     main()

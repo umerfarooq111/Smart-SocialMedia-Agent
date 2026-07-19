@@ -1,4 +1,4 @@
-# 🛡️ CommentAnalyzer: AI Social Media Moderation Agent
+# CommentAnalyzer: AI Social Media Moderation Agent
 
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/framework-LangChain%20%7C%20LangGraph-orange.svg)](https://js.langchain.com/docs/)
@@ -131,7 +131,6 @@ CommentAnalyzer/
     │   └── moderation.py # Tools logic (reply, delete, escalate, hide, ignore)
     └── utils/            # Helper functions
         ├── __init__.py
-        ├── helpers.py    # Text parsing & object extractions
         └── printer.py    # Pretty-printing stream outputs
 ```
 
@@ -216,9 +215,11 @@ Here are real scenarios processed by the CommentAnalyzer agent:
   ============================================================
   Final Response
   ============================================================
-  Reply Generated Successfully
+  Analysis:
+  - Intent: Customer complaint
+  - Severity: Low
+  - Recommended action: Reply
   
-  Reply:
   We are so sorry to hear that! We want to make this right. Please send us a direct message with your order number and contact details so our support team can assist you immediately.
   ```
 
@@ -237,6 +238,11 @@ Here are real scenarios processed by the CommentAnalyzer agent:
   ============================================================
   Final Response
   ============================================================
+  Analysis:
+  - Intent: Hate Speech / Threat
+  - Severity: High
+  - Recommended action: Delete & Escalate
+  
   Comment deleted successfully. Escalated to a human moderator.
   ```
 

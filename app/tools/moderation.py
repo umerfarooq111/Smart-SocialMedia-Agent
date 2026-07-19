@@ -1,6 +1,14 @@
+from pydantic import BaseModel, Field
 from langchain_core.tools import tool
 from app.llm.model import llm
 from app.prompts.reply_prompt import REPLY_PROMPT
+
+class CommentAnalysis(BaseModel):
+    sentiment: str = Field(description="The overall sentiment of the comment (e.g., Positive, Negative, Neutral).")
+    category: str = Field(description="The category of the comment. Must be one of: Complaint, Question, Positive Feedback, Spam, Hate Speech, Abuse, Other.")
+    risk_level: str = Field(description="The risk level of the comment (e.g., Low, Medium, High).")
+
+structured_llm = llm.with_structured_output(CommentAnalysis)
 
 @tool
 def reply_tool(comment: str) -> str:
@@ -32,29 +40,13 @@ Analyze this social media comment.
 
 Comment:
 {comment}
-
-Return:
-
-Sentiment:
-Category:
-Risk Level:
-
-Possible categories:
-- Complaint
-- Question
-- Positive Feedback
-- Spam
-- Hate Speech
-- Abuse
-- Other
-
-Do not decide the action.
-Only provide analysis.
 """
 
-    response = llm.invoke(analysis_prompt)
+    analysis = structured_llm.invoke(analysis_prompt)
 
-    return response.content
+    return f"""Sentiment: {analysis.sentiment}
+Category: {analysis.category}
+Risk Level: {analysis.risk_level}"""
 
 @tool
 def delete_tool(comment: str) -> str:
