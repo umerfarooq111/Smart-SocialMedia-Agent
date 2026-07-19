@@ -23,22 +23,16 @@ An autonomous, multi-tool AI Agent designed to moderate, analyze, and reply to s
 - [💻 Usage Instructions](#-usage-instructions)
 - [🧪 Sample Inputs & Outputs](#-sample-inputs--outputs)
 - [🛠️ Technologies & Dependencies](#%EF%B8%8F-technologies--dependencies)
-- [🔒 Security Best Practices](#-security-best-practices)
-- [🗺️ Project Roadmap](#%EF%B8%8F-project-roadmap)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [🙏 Acknowledgements](#-acknowledgements)
-- [👤 Author Details](#-author-details)
 
 ---
 
-## 📖 Introduction
+## Introduction
 
 In the modern digital landscape, brand reputation is heavily influenced by public interactions on social media platforms. **CommentAnalyzer** is an intelligent, autonomous moderation assistant that acts as the first line of defense. By combining natural language understanding (NLU) with an event-driven agent model, CommentAnalyzer does not just classify comments; it takes proactive operational actions—whether that is drafting empathetic replies, hiding inappropriate content, or escalating toxic behavior to human moderators.
 
 ---
 
-## ⚠️ Problem Statement
+## Problem Statement
 
 Modern social media managers are overwhelmed by the sheer volume of comments. Manual moderation is:
 1. **Inefficient:** Response times for critical customer support questions are delayed.
@@ -49,7 +43,7 @@ Modern social media managers are overwhelmed by the sheer volume of comments. Ma
 
 ---
 
-## 🎯 Objectives
+## Objectives
 
 - **Automated Response:** Address complaints and feedback instantly with context-aware, professional messaging.
 - **Brand Protection:** Instantly detect and purge spam or abusive content before it reaches public visibility.
@@ -58,7 +52,7 @@ Modern social media managers are overwhelmed by the sheer volume of comments. Ma
 
 ---
 
-## ✨ Features
+## Features
 
 - **Deep Text Analysis:** Automatically determines sentiment, category (e.g., Complaint, Question, Spam), and risk level.
 - **Multi-Tool Pipeline:** Dynamically triggers multiple tools in sequence (e.g., `delete_tool` + `escalate_tool` for high-risk text).
@@ -68,7 +62,7 @@ Modern social media managers are overwhelmed by the sheer volume of comments. Ma
 
 ---
 
-## 🏗️ Architecture & Design
+## Architecture & Design
 
 The agent is built on a tool-calling loop using a Google Gemini Model. Below is the workflow diagram illustrating how comments pass from user input to final action.
 
@@ -94,7 +88,7 @@ graph TD
 
 ---
 
-## 🔄 Agent Workflow
+## Agent Workflow
 
 The agent operates under strict operational guidelines:
 
@@ -108,7 +102,7 @@ The agent operates under strict operational guidelines:
 
 ---
 
-## 📂 Folder Structure
+## Folder Structure
 
 The project has been structured cleanly to separate configuration, core business logic, utility functions, and prompt templates:
 
@@ -143,7 +137,7 @@ CommentAnalyzer/
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 To run this project, make sure you have:
 - **Python:** Version `3.11` or higher.
@@ -152,7 +146,7 @@ To run this project, make sure you have:
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1. **Clone the Repository:**
    ```bash
@@ -246,25 +240,6 @@ Here are real scenarios processed by the CommentAnalyzer agent:
   Comment deleted successfully. Escalated to a human moderator.
   ```
 
-### Scenario 3: Promotional Spam
-* **Input comment:** `"Earn $500/day working from home! Click here: http://fake-spam-link.com"`
-* **Agent Executed Tools:** `analyze_comment_tool` ➡️ `delete_tool`
-* **Console Logs & Response:**
-  ```text
-  Enter Comment (type 'exit' to quit):
-  > Earn $500/day working from home! Click here: http://fake-spam-link.com
-  
-  Analyze Comment Tool Executed
-  Delete Tool Executed
-  
-  ============================================================
-  Final Response
-  ============================================================
-  Comment deleted successfully.
-  ```
-
----
-
 ## 🛠️ Technologies & Dependencies
 
 This project relies on the following key dependencies:
@@ -276,54 +251,3 @@ This project relies on the following key dependencies:
 
 ---
 
-## 🔒 Security Best Practices
-
-1. **Protect Your API Keys:** 
-   - Never commit `.env` or credentials to version control.
-   - The `.gitignore` is pre-configured to block `.env` pushes.
-2. **Rate Limiting & Cost Management:**
-   - Gemini models have request quotas. Implement rate limit wrappers when connecting this to production live streams (like webhooks).
-3. **Safety Guardrails:**
-   - Always verify the agent’s system guidelines.
-   - Use Gemini's native safety settings in `model.py` to block toxic outputs from the LLM itself.
-
----
-
-## 🗺️ Project Roadmap
-
-- [ ] **Web Dashboard UI:** Build a simple frontend (Next.js/Streamlit) to inspect flagged comments.
-- [ ] **Database Integration:** Save moderation logs (input, actions taken, model latencies) to PostgreSQL or MongoDB.
-- [ ] **Webhook Integrations:** Connect to live Facebook Graph API, Instagram API, or Discord Webhooks.
-- [ ] **Multi-lingual support:** Expand classification parameters to detect toxicity in Spanish, German, French, etc.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps to make a contribution:
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`.
-3. Commit your changes: `git commit -m "Add some feature"`.
-4. Push to the branch: `git push origin feature/your-feature-name`.
-5. Open a Pull Request.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgements
-
-- Google DeepMind team for providing access to the **Gemini 2.0 Flash** model.
-- LangChain team for their intuitive agent frameworks.
-
----
-
-## 👤 Author Details
-
-- **Author:** Umer Farooq
-- **GitHub:** [@umerfarooq111](https://github.com/umerfarooq111)
-- **Workspace Corpus:** `Smart-SocialMedia-Agent`
