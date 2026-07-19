@@ -1,18 +1,60 @@
 from langchain_core.tools import tool
-
+from app.llm.model import llm
+from app.prompts.reply_prompt import REPLY_PROMPT
 
 @tool
 def reply_tool(comment: str) -> str:
     """
-    Reply professionally to a customer.
+    Generate a professional reply to a social media comment.
     """
     print("\nReply Tool Executed\n")
+    prompt = REPLY_PROMPT.format(comment=comment)
+    response = llm.invoke(prompt)
+    reply = response.content
 
-    return (
-        "Reply posted successfully. "
-        "The customer received a professional response."
-    )
+    return f""" Reply Generated Successfully
 
+Reply:
+{reply}
+"""
+
+@tool
+def analyze_comment_tool(comment: str) -> str:
+    """
+    Analyze a social media comment and provide insights
+    about sentiment, category, and risk level.
+    """
+
+    print("\nAnalyze Comment Tool Executed\n")
+
+    analysis_prompt = f"""
+Analyze this social media comment.
+
+Comment:
+{comment}
+
+Return:
+
+Sentiment:
+Category:
+Risk Level:
+
+Possible categories:
+- Complaint
+- Question
+- Positive Feedback
+- Spam
+- Hate Speech
+- Abuse
+- Other
+
+Do not decide the action.
+Only provide analysis.
+"""
+
+    response = llm.invoke(analysis_prompt)
+
+    return response.content
 
 @tool
 def delete_tool(comment: str) -> str:
