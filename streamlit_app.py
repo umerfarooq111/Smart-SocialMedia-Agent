@@ -16,19 +16,12 @@ st.set_page_config(
 # Sidebar
 # ---------------------------------------------------------
 with st.sidebar:
-    st.title("🤖 CommentAnalyzer AI Agent")
+    st.title("🤖Customer Support AI Agent")
     st.caption("Autonomous AI Customer Support & Moderation")
     st.divider()
 
     st.markdown("### System Status")
     st.success("🟢 System Online & Connected")
-
-    st.divider()
-    st.markdown("### Technology Stack")
-    st.markdown("- **LangChain** (Tool Integration)")
-    st.markdown("- **LangGraph** (Agentic Workflow)")
-    st.markdown("- **PostgreSQL** (Product Database)")
-    st.markdown("- **Groq LLM** (Reasoning Engine)")
 
     st.divider()
     if st.button("Clear Conversation", use_container_width=True):
@@ -45,8 +38,8 @@ if "query_input" not in st.session_state:
 # ---------------------------------------------------------
 # Header & Quick Samples
 # ---------------------------------------------------------
-st.title("Autonomous AI Support & Moderation Dashboard")
-st.write("Enter social media comments, customer complaints, or product availability questions below.")
+st.title("Smart Customer Support & Moderation AI Agent")
+st.write("Enter comments, customer complaints, or product availability questions below.")
 
 st.markdown("##### Sample Inputs")
 c1, c2, c3, c4 = st.columns(4)
@@ -66,28 +59,33 @@ if c4.button("⚠️ Spam Moderation", use_container_width=True):
 # Input Form
 with st.form(key="inquiry_form", clear_on_submit=False):
     user_query = st.text_area(
-        "Customer Inquiry or Social Media Comment",
+        "Customer Inquiry or Comment",
         value=st.session_state.query_input,
         placeholder="e.g., Is iPhone 15 available? or My order arrived damaged...",
         height=100
     )
-    submitted = st.form_submit_button("Run Agent Workflow", type="primary", use_container_width=True)
+    submitted = st.form_submit_button("Run Agent", type="primary", use_container_width=True)
 
 
 # Helper Functions to parse results
 def parse_json_safely(text):
-    if not text:
-        return None
-    try:
-        return json.loads(text)
-    except Exception:
-        match = re.search(r"\{.*\}", text, re.DOTALL)
-        if match:
-            try:
-                return json.loads(match.group(0))
-            except Exception:
-                pass
-    return None
+
+    if isinstance(text, list):
+        text = text[0].get("text", "")
+
+    match = re.search(
+        r"\{.*\}",
+        text,
+        re.DOTALL
+    )
+
+    if match:
+        return json.loads(match.group())
+
+    return {
+        "status": "error",
+        "message": "Invalid JSON response"
+    }
 
 
 def render_product_card(product_data, message=None):
@@ -152,9 +150,7 @@ def render_moderation_card(analysis_data, action_taken, reply_text):
         st.success(reply_text)
 
 
-# ---------------------------------------------------------
 # Agent Execution
-# ---------------------------------------------------------
 if submitted and user_query.strip():
     st.markdown("---")
     st.subheader("Agent Workflow & Response")
