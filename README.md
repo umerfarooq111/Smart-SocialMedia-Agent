@@ -64,27 +64,30 @@ Unlike deterministic scripts, CommentAnalyzer runs inside an agentic runtime loo
 
 ```mermaid
 graph TD
-    User([User Input Comment]) --> Agent[Autonomous AI Agent / LLM Reasoning Engine]
-    
-    subgraph ReAct Loop [Reason → Act → Observe Loop]
-        Agent -->|1. Reason & Select Tool| Tools{Available Tools}
-        
-        Tools -->|analyze_comment_tool| NLU[Structured Analysis\nSentiment / Category / Risk]
-        Tools -->|reply_tool| Support[Generate Support Reply]
-        Tools -->|delete_tool| Delete[Delete Harmful Content]
+    User([User Comment]) --> Agent[Autonomous AI Agent]
+
+    subgraph ReAct Loop [Reason → Act → Observe]
+        Agent --> Reason[LLM Decision Making]
+        Reason --> Tools{Select Tool}
+
+        Tools -->|analyze_comment_tool| Analysis[Analyze Sentiment / Category / Risk]
+        Tools -->|reply_tool| Reply[Generate Professional Reply]
+        Tools -->|delete_tool| Delete[Remove Harmful Content]
         Tools -->|hide_tool| Hide[Hide Inappropriate Content]
-        Tools -->|escalate_tool| Escalate[Escalate to Human]
+        Tools -->|escalate_tool| Escalate[Send to Human Moderator]
         Tools -->|ignore_tool| Ignore[No Action Required]
-        
-        NLU -->|2. Observe Output| Agent
-        Support -->|2. Observe Output| Agent
-        Delete -->|2. Observe Output| Agent
-        Hide -->|2. Observe Output| Agent
-        Escalate -->|2. Observe Output| Agent
-        Ignore -->|2. Observe Output| Agent
+
+        Analysis --> Observe[Observe Tool Result]
+        Reply --> Observe
+        Delete --> Observe
+        Hide --> Observe
+        Escalate --> Observe
+        Ignore --> Observe
+
+        Observe --> Agent
     end
-    
-    Agent -->|3. Finalize Synthesis| Output([Structured Analysis & Action Output])
+
+    Agent --> Final([Final Response])
 ```
 
 ---
