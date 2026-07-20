@@ -19,6 +19,8 @@ def main():
         print("Agent Streaming Progress")
         print("=" * 60)
 
+        final_message = None
+
         for chunk in agent.stream(
             {
                 "messages": [
@@ -28,7 +30,17 @@ def main():
         ):
             print_stream(chunk)
 
+            for _, data in chunk.items():
+                if "messages" in data:
+                    final_message = data["messages"][-1]
+
+
         print("\n" + "=" * 60)
+        print("Final Response")
+        print("=" * 60)
+
+        if final_message:
+            print(final_message.content)
 
 if __name__ == "__main__":
     main()

@@ -1,151 +1,188 @@
-# CommentAnalyzer: AI Social Media Moderation Agent
+# 🤖 CommentAnalyzer: Autonomous AI Social Media Moderation Agent
 
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/framework-LangChain%20%7C%20LangGraph-orange.svg)](https://js.langchain.com/docs/)
-[![LLM](https://img.shields.io/badge/LLM-Gemini%202.0%20Flash-red.svg?logo=google-gemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
+[![Framework](https://img.shields.io/badge/framework-LangChain%20%7C%20LangGraph-orange.svg)](https://python.langchain.com/)
+[![LLM Engine](https://img.shields.io/badge/LLM-Llama%203.3--70B%20(Groq)-purple.svg)](https://groq.com/)
+[![Architecture](https://img.shields.io/badge/architecture-ReAct%20Agent-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-An autonomous, multi-tool AI Agent designed to moderate, analyze, and reply to social media comments in real-time. Powered by **Google Gemini 2.0 Flash**, **LangChain**, and **LangGraph**, the agent evaluates user intent, executes safety actions, and drafts professional support responses.
+**CommentAnalyzer** is a portfolio-grade, autonomous AI Agent designed for real-time social media content moderation and customer engagement. Built using **LangChain**, **LangGraph**, and powered by **Llama 3.3 70B (via Groq)**, the agent dynamically evaluates user intent, selects and executes moderation tools, and generates empathetic customer support responses—all without rigid, hardcoded `if/else` conditional logic.
 
 ---
 
 ## 📌 Table of Contents
 
-- [📖 Introduction](#-introduction)
-- [⚠️ Problem Statement](#-problem-statement)
+- [📖 Project Overview](#-project-overview)
 - [🎯 Objectives](#-objectives)
-- [✨ Features](#-features)
-- [🏗️ Architecture & Design](#%EF%B8%8F-architecture--design)
-- [🔄 Agent Workflow](#-agent-workflow)
-- [📂 Folder Structure](#-folder-structure)
-- [⚙️ Prerequisites](#%EF%B8%8F-prerequisites)
-- [🚀 Installation & Setup](#-installation--setup)
+- [✨ Key Features](#-key-features)
+- [🧠 Autonomous Agent Architecture](#-autonomous-agent-architecture)
+- [🔄 Reason → Act → Observe Workflow](#-reason--act--observe-workflow)
+- [🛠️ Tool Ecosystem & Schemas](#%EF%B8%8F-tool-ecosystem--schemas)
+- [📂 Project Structure](#-project-structure)
+- [⚙️ Prerequisites & Installation](#%EF%B8%8F-prerequisites--installation)
 - [💻 Usage Instructions](#-usage-instructions)
-- [🧪 Sample Inputs & Outputs](#-sample-inputs--outputs)
-- [🛠️ Technologies & Dependencies](#%EF%B8%8F-technologies--dependencies)
+- [🧪 Example Inputs & Outputs](#-example-inputs--outputs)
+- [🚀 Tech Stack & Dependencies](#-tech-stack--dependencies)
 
 ---
 
-## Introduction
+## Project Overview
 
-In the modern digital landscape, brand reputation is heavily influenced by public interactions on social media platforms. **CommentAnalyzer** is an intelligent, autonomous moderation assistant that acts as the first line of defense. By combining natural language understanding (NLU) with an event-driven agent model, CommentAnalyzer does not just classify comments; it takes proactive operational actions—whether that is drafting empathetic replies, hiding inappropriate content, or escalating toxic behavior to human moderators.
+In social media management, traditional moderation systems rely on static keyword blocklists and rigid decision trees. These legacy systems struggle with nuance, sarcasm, complex sentiment, and multi-step action planning.
 
----
-
-## Problem Statement
-
-Modern social media managers are overwhelmed by the sheer volume of comments. Manual moderation is:
-1. **Inefficient:** Response times for critical customer support questions are delayed.
-2. **Emotionally Taxing:** Constant exposure to toxic feedback, spam, and hate speech harms human moderators.
-3. **Inconsistent:** Different moderators may respond to the same issues with varying tones or rules.
-
-**CommentAnalyzer** solves this by providing a unified, context-aware AI moderator that processes comments immediately, applies consistent policies, and knows exactly when to seek human intervention.
+**CommentAnalyzer** addresses this by deploying an **Autonomous ReAct (Reasoning + Acting) Agent**. The agent treats moderation as an interactive reasoning problem:
+1. It analyzes comments contextually using structured NLU output.
+2. It autonomously determines which actions to take based on high-level operational guidelines.
+3. It selects and invokes appropriate tools dynamically in sequence (e.g., analyzing sentiment, drafting support replies, purging abusive content, or escalating security threats to human moderators).
 
 ---
 
 ## Objectives
 
-- **Automated Response:** Address complaints and feedback instantly with context-aware, professional messaging.
-- **Brand Protection:** Instantly detect and purge spam or abusive content before it reaches public visibility.
-- **Operational Scalability:** Handle thousands of comments concurrently without latency or overhead.
-- **Human-in-the-Loop Safeguards:** Ensure extreme or high-risk threats are immediately routed to human security teams.
+- **Autonomous Decision-Making:** Eliminate hardcoded rules by delegating action selection entirely to LLM-driven reasoning.
+- **Dynamic Tool Selection:** Enable multi-tool execution pipelines where the agent decides tool selection and execution order dynamically.
+- **Brand Protection & Safety:** Rapidly identify spam, toxic language, and threats to mitigate brand damage in real time.
+- **Contextual Customer Engagement:** Automatically draft empathetic, brand-aligned responses (< 50 words) to customer inquiries and complaints.
+- **Human-in-the-Loop Integration:** Seamlessly route critical or high-risk incidents to human moderation teams.
 
 ---
 
-## Features
+## Key Features
 
-- **Deep Text Analysis:** Automatically determines sentiment, category (e.g., Complaint, Question, Spam), and risk level.
-- **Multi-Tool Pipeline:** Dynamically triggers multiple tools in sequence (e.g., `delete_tool` + `escalate_tool` for high-risk text).
-- **Professional Auto-Replies:** Generates brief, empathetic support replies (< 50 words) adhering strictly to support guidelines.
-- **Modular Design:** Highly extensible codebase with clean separation of prompts, tools, utilities, and agent configuration.
-- **Interactive CLI Console:** Built-in interactive console for testing and executing moderation flows locally.
+- **Zero Hardcoded Logic:** Replaces traditional `if/else` control flow with LLM-guided tool selection.
+- **ReAct Execution Cycle:** Follows a continuous Reason → Act → Observe loop to complete multi-stage workflows.
+- **Structured NLU Analysis:** Uses Pydantic schemas to output structured sentiment, category, and risk classifications.
+- **High-Speed Inference:** Powered by Groq's LPU infrastructure running Llama 3.3 70B for near-instant response times.
+- **Modular Tool Architecture:** Encapsulates moderation operations (`analyze`, `reply`, `delete`, `hide`, `escalate`, `ignore`) into clean, reusable LangChain tools.
+- **Interactive CLI Console:** Built-in streaming terminal interface showing live agent thought processes and tool execution steps.
 
 ---
 
-## Architecture & Design
+## Autonomous Agent Architecture
 
-The agent is built on a tool-calling loop using a Google Gemini Model. Below is the workflow diagram illustrating how comments pass from user input to final action.
+Unlike deterministic scripts, CommentAnalyzer runs inside an agentic runtime loop. The agent evaluates system instructions, tool descriptions, and user input to determine its execution path dynamically.
 
 ```mermaid
 graph TD
-    A[User Input / Comment] --> B[AI Moderation Agent]
-    B --> C{Decision Node}
-    C -->|Analyze Intent| D[analyze_comment_tool]
-    D -->|Classification & Risk Analysis| B
+    User([User Input Comment]) --> Agent[Autonomous AI Agent / LLM Reasoning Engine]
     
-    C -->|Positive / Question / Complaint| E[reply_tool]
-    C -->|Spam| F[delete_tool]
-    C -->|Hate / Threat| G[delete_tool & escalate_tool]
-    C -->|Normal / Casual| H[ignore_tool]
+    subgraph ReAct Loop [Reason → Act → Observe Loop]
+        Agent -->|1. Reason & Select Tool| Tools{Available Tools}
+        
+        Tools -->|analyze_comment_tool| NLU[Structured Analysis\nSentiment / Category / Risk]
+        Tools -->|reply_tool| Support[Generate Support Reply]
+        Tools -->|delete_tool| Delete[Delete Harmful Content]
+        Tools -->|hide_tool| Hide[Hide Inappropriate Content]
+        Tools -->|escalate_tool| Escalate[Escalate to Human]
+        Tools -->|ignore_tool| Ignore[No Action Required]
+        
+        NLU -->|2. Observe Output| Agent
+        Support -->|2. Observe Output| Agent
+        Delete -->|2. Observe Output| Agent
+        Hide -->|2. Observe Output| Agent
+        Escalate -->|2. Observe Output| Agent
+        Ignore -->|2. Observe Output| Agent
+    end
     
-    E --> I[Generate Professional Response]
-    F --> J[Remove Comment from Platform]
-    G --> K[Remove Comment & Alert Human]
-    H --> L[No Action Taken]
-    
-    I & J & K & L --> M[Console / API Output]
+    Agent -->|3. Finalize Synthesis| Output([Structured Analysis & Action Output])
 ```
 
 ---
 
-## Agent Workflow
+## Reason → Act → Observe Workflow
 
-The agent operates under strict operational guidelines:
+The agent operates via a 3-stage iterative cycle:
 
-| Category | Description | Primary Action | Secondary Action |
-|---|---|---|---|
-| **Complaint** | Negative customer experience | `reply_tool` (apologize, offer support) | - |
-| **Spam** | Promotional/irrelevant links | `delete_tool` (purge comment) | - |
-| **Hate Speech / Threat** | Abusive, toxic, or violent language | `delete_tool` (immediate removal) | `escalate_tool` (alert security) |
-| **Positive Feedback** | Appreciative user comments | `reply_tool` (thank the customer) | - |
-| **Normal Discussion** | Casual, non-actionable remarks | `ignore_tool` (no action) | - |
+1. **Reason:**
+   - The LLM receives the input comment and inspects available tool descriptions.
+   - It formulates an execution plan: first run `analyze_comment_tool` to establish sentiment, category, and risk level.
+
+2. **Act:**
+   - The agent emits a tool call (e.g., `analyze_comment_tool(comment="...")`).
+   - The tool runs and returns structured JSON context to the agent state.
+
+3. **Observe & Iterate:**
+   - The agent reads the tool output (*Observation*).
+   - Based on the observed risk and category, it decides whether another tool is required:
+     - **Complaint / Positive Feedback:** Calls `reply_tool` to generate a professional support message.
+     - **Spam:** Calls `delete_tool` to remove the post.
+     - **Hate Speech / Threat:** Calls `delete_tool` followed by `escalate_tool`.
+     - **Normal / Casual:** Calls `ignore_tool`.
+
+4. **Complete:**
+   - Once all necessary actions are observed, the agent synthesizes the results and outputs a standardized summary containing the analysis breakdown and executed actions.
 
 ---
 
-## Folder Structure
+## Tool Ecosystem & Schemas
 
-The project has been structured cleanly to separate configuration, core business logic, utility functions, and prompt templates:
+### 1. `analyze_comment_tool`
+Performs structured analysis on the raw comment text using Pydantic validation:
+```python
+class CommentAnalysis(BaseModel):
+    sentiment: str  # Positive, Negative, Neutral
+    category: str   # Complaint, Question, Positive Feedback, Spam, Hate Speech, Abuse, Other
+    risk_level: str # Low, Medium, High
+```
+
+### 2. `reply_tool`
+Invokes the LLM with a dedicated customer support prompt template (`REPLY_PROMPT`) to write polite, empathetic responses under 50 words.
+
+### 3. `delete_tool`
+Simulates removing harmful or policy-violating comments from the social platform.
+
+### 4. `hide_tool`
+Simulates hiding inappropriate content from public view while preserving records.
+
+### 5. `escalate_tool`
+Flags high-risk comments (threats, severe abuse) and routes them to human security/moderation teams.
+
+### 6. `ignore_tool`
+Explicitly records that no action is required for benign, non-actionable remarks.
+
+---
+
+## 📂 Project Structure
 
 ```text
 CommentAnalyzer/
-├── .env                  # Local environment configuration (contains API Keys)
-├── .gitignore            # Git exclusion guidelines
-├── .python-version       # Pin for active python environment
-├── pyproject.toml        # Package & dependency declaration
-├── run.py                # Main CLI interactive loop
-├── uv.lock               # Lockfile for dependency tree
+├── .env                  # Environment variables (GROQ_API_KEY)
+├── .gitignore            # Version control exclusion rules
+├── .python-version       # Python version pin (3.11+)
+├── pyproject.toml        # Project dependencies and workspace config
+├── README.md             # Project documentation
+├── run.py                # Main CLI interactive agent execution script
+├── uv.lock               # Deterministic dependency lockfile
 └── app/
-    ├── __init__.py       # Package initializer
-    ├── agent/            # Agent definition & core orchestration
+    ├── __init__.py
+    ├── agent/
     │   ├── __init__.py
-    │   ├── agent.py      # Main LangChain agent setup
-    │   └── prompts.py    # Local system prompts for agent instructions
-    ├── llm/              # Large Language Model definitions
+    │   ├── agent.py      # LangChain agent initialization (create_agent)
+    │   └── prompts.py    # Agent system prompt defining reasoning rules
+    ├── llm/
     │   ├── __init__.py
-    │   └── model.py      # Initialization of Google Gemini 2.0 Flash
-    ├── prompts/          # Global prompt templates
+    │   └── model.py      # Groq LLM model configuration (Llama 3.3 70B)
+    ├── prompts/
     │   ├── __init__.py
-    │   └── reply_prompt.py   # Style guidelines for customer support replies
-    ├── tools/            # Modulating tools
-    │   ├── __init__.py   # Exports registered list of tools
-    │   └── moderation.py # Tools logic (reply, delete, escalate, hide, ignore)
-    └── utils/            # Helper functions
+    │   └── reply_prompt.py # Persona prompt for customer support responses
+    ├── tools/
+    │   ├── __init__.py   # Registered tools export list
+    │   └── moderation.py # Custom tool definitions & Pydantic schemas
+    └── utils/
         ├── __init__.py
-        └── printer.py    # Pretty-printing stream outputs
+        └── printer.py    # Stream helper for visualizing agent tool execution
 ```
 
 ---
 
-## Prerequisites
+## ⚙️ Prerequisites & Installation
 
-To run this project, make sure you have:
+### Prerequisites
 - **Python:** Version `3.11` or higher.
-- **UV Package Manager:** Recommended for fast, reproducible environments (or standard `pip`/`venv`).
-- **Google Gemini API Key:** An active API key from Google AI Studio.
+- **Package Manager:** `uv` (recommended for ultra-fast setup) or standard `pip`.
+- **API Key:** Groq API Key (obtain from [Groq Console](https://console.groq.com/)).
 
----
-
-## Installation & Setup
+### Installation Steps
 
 1. **Clone the Repository:**
    ```bash
@@ -153,107 +190,123 @@ To run this project, make sure you have:
    cd CommentAnalyzer
    ```
 
-2. **Create and Activate a Virtual Environment:**
-   If using the fast `uv` package manager:
+2. **Set Up Virtual Environment & Dependencies:**
+   Using `uv`:
    ```bash
    uv venv
    .venv\Scripts\activate      # Windows (PowerShell)
    # OR
    source .venv/bin/activate    # Linux / macOS
-   ```
 
-3. **Install Dependencies:**
-   ```bash
    uv sync
-   # OR with pip
-   pip install -r requirements.txt
    ```
 
-4. **Environment Setup:**
-   Create a `.env` file in the root directory (or update the existing one):
+   *Alternatively, using standard `pip`:*
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # Linux / macOS
+   pip install -e .
+   ```
+
+3. **Configure Environment Variables:**
+   Create a `.env` file in the root directory:
    ```ini
-   # Add your Google Gemini API Key from Google AI Studio
-   GOOGLE_API_KEY="your-gemini-api-key-here"
+   GROQ_API_KEY="your-groq-api-key-here"
    ```
 
 ---
 
 ## 💻 Usage Instructions
 
-To launch the interactive CLI and moderate comments in real-time, execute the following:
+Run the interactive CLI loop using `uv`:
 
 ```bash
 uv run run.py
-# OR
+```
+
+*Or using python directly:*
+```bash
 python run.py
 ```
 
-### Exiting the console
-Type `exit` in the console prompt to terminate the session safely.
+### Terminating the Console
+Type `exit` at the interactive prompt to quit the application.
 
 ---
 
-## 🧪 Sample Inputs & Outputs
+## 🧪 Example Inputs & Outputs
 
-Here are real scenarios processed by the CommentAnalyzer agent:
+### Scenario 1: Positive Customer Feedback
+**Input:** `"Amazing Service"`
 
-### Scenario 1: A Customer Complaint
-* **Input comment:** `"I received my order today and it was damaged. Very disappointed!"`
-* **Agent Executed Tools:** `analyze_comment_tool` ➡️ `reply_tool`
-* **Console Logs & Response:**
-  ```text
-  ============================================================
-  AI Social Media Moderation Agent
-  ============================================================
-  
-  Enter Comment (type 'exit' to quit):
-  > I received my order today and it was damaged. Very disappointed!
-  
-  Analyze Comment Tool Executed
-  Reply Tool Executed
-  
-  ============================================================
-  Final Response
-  ============================================================
-  Analysis:
-  - Intent: Customer complaint
-  - Severity: Low
-  - Recommended action: Reply
-  
-  We are so sorry to hear that! We want to make this right. Please send us a direct message with your order number and contact details so our support team can assist you immediately.
-  ```
+**Agent Execution Stream:**
+```text
+============================================================
+AI Social Media Moderation Agent
+============================================================
 
-### Scenario 2: Severe Abuse / Hate Speech
-* **Input comment:** `"You guys are complete idiots and I hope your store burns down!"`
-* **Agent Executed Tools:** `analyze_comment_tool` ➡️ `delete_tool` ➡️ `escalate_tool`
-* **Console Logs & Response:**
-  ```text
-  Enter Comment (type 'exit' to quit):
-  > You guys are complete idiots and I hope your store burns down!
-  
-  Analyze Comment Tool Executed
-  Delete Tool Executed
-  Escalate Tool Executed
-  
-  ============================================================
-  Final Response
-  ============================================================
-  Analysis:
-  - Intent: Hate Speech / Threat
-  - Severity: High
-  - Recommended action: Delete & Escalate
-  
-  Comment deleted successfully. Escalated to a human moderator.
-  ```
+Enter Comment (type 'exit' to quit):
+> Amazing Service
 
-## 🛠️ Technologies & Dependencies
+============================================================
+Agent Streaming Progress
+============================================================
 
-This project relies on the following key dependencies:
+🔧 Calling: analyze_comment_tool
+Analyze Comment Tool Executed
 
-- **[LangChain Core & Community](https://github.com/langchain-ai/langchain):** Orchestrating prompts, models, tool bindings, and output parsers.
-- **[LangGraph](https://github.com/langchain-ai/langgraph):** Managing graph states, sequential nodes, and dynamic conditional router logic.
-- **[Langchain-Google-GenAI](https://github.com/langchain-ai/langchain-google):** Dedicated SDK wrapper to invoke Gemini's powerful API.
-- **[Python-Dotenv](https://github.com/theofidry/django-dotenv-checker):** Secure loading of environmental credentials from `.env` files.
+🔧 Calling: reply_tool
+Reply Tool Executed
+
+============================================================
+Final Response
+============================================================
+Analysis:
+- Intent: Positive Feedback
+- Severity: Low
+- Recommended action: Reply
+
+Reply:
+Thank you so much! We're glad you had a great experience with us.
+```
 
 ---
 
+### Scenario 2: Customer Complaint
+**Input:** `"My package was delivered damaged and two days late! Unsatisfied with this."`
+
+**Agent Execution Stream:**
+```text
+Enter Comment (type 'exit' to quit):
+> My package was delivered damaged and two days late! Unsatisfied with this.
+
+============================================================
+Agent Streaming Progress
+============================================================
+
+🔧 Calling: analyze_comment_tool
+Analyze Comment Tool Executed
+
+🔧 Calling: reply_tool
+Reply Tool Executed
+
+============================================================
+Final Response
+============================================================
+Analysis:
+- Intent: Complaint
+- Severity: Medium
+- Recommended action: Reply
+
+Reply:
+We sincerely apologize for the delay and the damaged package. Please reach out to our support team with your order number so we can arrange a replacement right away.
+```
+---
+## Tech Stack & Dependencies
+
+- **[LangChain](https://github.com/langchain-ai/langchain):** Agent framework, prompt templates, tool bindings, and state management.
+- **[LangGraph](https://github.com/langchain-ai/langgraph):** Agentic graph workflow and tool execution loop.
+- **[LangChain Groq](https://github.com/langchain-ai/langchain-groq):** High-speed LLM integration utilizing Llama 3.3 70B.
+- **[Pydantic v2](https://docs.pydantic.dev/):** Data parsing and validation for structured NLU outputs.
+- **[Python-Dotenv](https://github.com/theofidry/django-dotenv-checker):** Environment variable loading.
+- **[UV](https://github.com/astral-sh/uv):** Fast Python package manager and project environment management.

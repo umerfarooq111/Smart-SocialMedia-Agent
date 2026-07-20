@@ -20,11 +20,11 @@ def reply_tool(comment: str) -> str:
     response = llm.invoke(prompt)
     reply = response.content
 
-    return f""" Reply Generated Successfully
-
-Reply:
-{reply}
-"""
+    return {
+        "action": "reply",
+        "status": "success",
+        "reply": response.content
+    }
 
 @tool
 def analyze_comment_tool(comment: str) -> str:
@@ -44,9 +44,13 @@ Comment:
 
     analysis = structured_llm.invoke(analysis_prompt)
 
-    return f"""Sentiment: {analysis.sentiment}
-Category: {analysis.category}
-Risk Level: {analysis.risk_level}"""
+    return {
+    "sentiment": analysis.sentiment,
+    "category": analysis.category,
+    "risk_level": analysis.risk_level
+}
+
+
 
 @tool
 def delete_tool(comment: str) -> str:

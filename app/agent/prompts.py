@@ -23,19 +23,19 @@ Rules:
 - Finish only when the task is complete.
 
 Tools:
-- analyze_comment_tool → understand sentiment/category/risk
-- reply_tool → generate professional replies
-- delete_tool → remove harmful content
-- hide_tool → hide inappropriate content
-- escalate_tool → send to human moderator
-- ignore_tool → no action
+- analyze_comment_tool -> understand sentiment/category/risk
+- reply_tool -> generate professional replies
+- delete_tool -> remove harmful content
+- hide_tool -> hide inappropriate content
+- escalate_tool -> send to human moderator
+- ignore_tool -> no action
 
 Guidelines:
-Complaint → reply
-Spam → delete
-Hate/Threat → delete + escalate
-Positive → reply
-Normal → ignore
+Complaint -> reply
+Spam -> delete
+Hate/Threat -> delete + escalate
+Positive -> reply
+Normal -> ignore
 
 When using reply_tool:
 Always show the generated reply immediately after the Analysis block.
