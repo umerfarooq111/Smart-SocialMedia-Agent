@@ -1,4 +1,4 @@
-# 🤖 CommentAnalyzer: Autonomous AI Social Media Moderation & Customer Support Agent
+# 🤖 Autonomous AI Social Media Moderation & Customer Support Agent
 
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/framework-LangChain%20%7C%20LangGraph-orange.svg)](https://python.langchain.com/)
@@ -7,7 +7,7 @@
 [![UI Framework](https://img.shields.io/badge/UI-Streamlit-red.svg?logo=streamlit)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**CommentAnalyzer** is a portfolio-grade, autonomous AI Agent designed for real-time social media content moderation, product queries, and customer engagement. Built using **LangChain**, **LangGraph**, **PostgreSQL**, and powered by **Llama 3.3 70B (via Groq)** with an enterprise **Streamlit UI**, the agent dynamically evaluates user intent, queries databases, executes moderation tools, and generates empathetic customer support responses—all without rigid, hardcoded `if/else` conditional logic.
+**Customer Support Agent** is a portfolio-grade, autonomous AI Agent designed for real-time social media content moderation, product queries, and customer engagement. Built using **LangChain**, **LangGraph**, **PostgreSQL**, and powered by **Llama 3.3 70B (via Groq)** with an enterprise **Streamlit UI**, the agent dynamically evaluates user intent, queries databases, executes moderation tools, and generates empathetic customer support responses—all without rigid, hardcoded `if/else` conditional logic.
 
 ---
 
@@ -32,7 +32,7 @@
 
 In social media management and customer support, traditional systems rely on static keyword blocklists and rigid decision trees. These legacy systems struggle with nuance, sarcasm, complex sentiment, product database integration, and multi-step action planning.
 
-**CommentAnalyzer** addresses this by deploying an **Autonomous ReAct (Reasoning + Acting) Agent**. The agent treats customer support and moderation as an interactive reasoning problem:
+**Customer Support Agent** addresses this by deploying an **Autonomous ReAct (Reasoning + Acting) Agent**. The agent treats customer support and moderation as an interactive reasoning problem:
 1. It analyzes comments and queries contextually.
 2. It autonomously determines whether to query product databases or moderate social media content.
 3. It selects and invokes appropriate tools dynamically in sequence (e.g., searching PostgreSQL databases, analyzing sentiment, drafting support replies, purging abusive content, or escalating security threats to human moderators).
